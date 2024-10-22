@@ -1,0 +1,51 @@
+{
+  "waves": [
+    {
+      "id": "1",
+      "enemySpawnPerSec": "1f",
+      "enemies":
+      [
+          {
+            "name":"BlueEnemy",
+            "count":5
+          }
+      ]
+    },
+    {
+      "id": "2",
+      "enemySpawnPerSec": ".5f",
+      "enemies":
+      [
+          {
+            "name":"BlueEnemy",
+            "count":5
+          },
+          {
+            "name":"RedEnemy",
+            "count":3
+          }
+      ]
+
+    },
+    {
+      "id": "3",
+      "enemySpawnPerSec": ".3f",
+      "enemies":
+      [
+          {
+            "name":"BlueEnemy",
+            "count":1
+          },
+          {
+            "name":"RedEnemy",
+            "count":3
+          },
+           {
+            "name":"BlackEnemy",
+            "count":4
+          }
+      ]
+
+    }
+  ]
+}

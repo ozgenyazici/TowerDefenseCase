@@ -1,0 +1,25 @@
+{
+  "enemies": [
+    {
+      "id": "1",
+      "name": "BlueEnemy",
+      "maxHp": "100",
+      "damage": "1",
+      "moveSpeed": "2.0"
+    },
+    {
+      "id": "2",
+      "name": "RedEnemy",
+      "maxHp": "150",
+      "damage": "1",
+      "moveSpeed": "2.0"
+    },
+    {
+      "id": "3",
+      "name": "BlackEnemy",
+      "maxHp": "200",
+      "damage": "5",
+      "moveSpeed": "2.0"
+    }
+  ]
+}
