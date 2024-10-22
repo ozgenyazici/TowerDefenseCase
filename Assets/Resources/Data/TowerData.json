@@ -1,0 +1,24 @@
+{
+  "towers": [
+    {
+      "id": "1",
+      "name": "FireTower",
+      "damage": "10",
+      "fireRate": "2.0",
+      "projectileSpeed":"3.0",
+      "range":"20",
+      "locked":false,
+      "unlockedLevel":0
+    },
+    {
+      "id": "2",
+      "name": "EnergyTower",
+      "damage": "10",
+      "fireRate": "2.0",
+      "range":"10",
+      "projectileSpeed":"3.0",
+      "locked":false,
+      "unlockedLevel":0
+    }
+  ]
+}

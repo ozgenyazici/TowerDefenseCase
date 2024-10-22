@@ -11,15 +11,15 @@ namespace TowerDefense.Data
 
     public class DataManager
     {
-        public Dictionary<int, Data.Enemy> EnemyData { get; private set; } = new Dictionary<int, Data.Enemy>();
-        public Dictionary<int, Data.Wave> WaveData { get; private set; } = new Dictionary<int, Data.Wave>();
-
+        public Dictionary<int, Enemy> EnemyData { get; private set; } = new Dictionary<int, Enemy>();
+        public Dictionary<int, Wave> WaveData { get; private set; } = new Dictionary<int, Wave>();
+        public Dictionary<int, Tower> TowerData { get; private set; } = new Dictionary<int, Tower>();
         public void Init()
         {
-            EnemyData = LoadJson<Data.EnemyData, int, Data.Enemy>("EnemyData").MakeDict();
-            WaveData = LoadJson<Data.WaveData, int, Data.Wave>("WaveData").MakeDict();
+            EnemyData = LoadJson<EnemyData, int, Enemy>(nameof(EnemyData)).MakeDict();
+            WaveData = LoadJson<WaveData, int, Wave>(nameof(WaveData)).MakeDict();
+            TowerData = LoadJson<TowerData, int, Tower>(nameof(TowerData)).MakeDict();
 
-            Debug.Log($"Init");
         }
 
         Loader LoadJson<Loader, Key, Value>(string path) where Loader : ILoader<Key, Value>

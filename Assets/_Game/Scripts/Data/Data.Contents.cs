@@ -62,4 +62,34 @@ namespace TowerDefense.Data
 
     #endregion
 
+    #region Tower
+    [Serializable]
+    public class Tower
+    {
+        public int id;
+        public string name;
+        public float damage;
+        public float fireRate;
+        public float projectileSpeed;
+        public bool locked;
+        public float range;
+        public int unlockedLevel;
+    }
+
+    [Serializable]
+    public class TowerData : ILoader<int, Tower>
+    {
+        public List<Tower> towers = new List<Tower>();
+        public Dictionary<int, Tower> MakeDict()
+        {
+            Dictionary<int, Tower> dict = new Dictionary<int, Tower>();
+            foreach (Tower tower in towers)
+                dict.Add(tower.id, tower);
+
+            return dict;
+        }
+    }
+
+    #endregion
+
 }
