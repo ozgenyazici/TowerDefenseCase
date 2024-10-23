@@ -22,7 +22,7 @@ namespace TowerDefense
         {
             fireRateDummy = FireRate;
             InvokeRepeating(nameof(UpdateTarget), 0f, 0.5f);
-            BuildingsGrid.OnBuildPlaced += Ready;
+            BuildingPlacer.OnBuildPlaced += Ready;
         }
 
         private void Ready()
@@ -83,6 +83,7 @@ namespace TowerDefense
             GameObject bulletGO = Managers.Resource.Instantiate("Weapons/Bullet", transform.position);//(GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 
             SetWeapon(bulletGO);
+            Debug.Log($"SpawnBullet");
 
 
         }

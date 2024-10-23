@@ -11,8 +11,6 @@ namespace TowerDefense
 
         public Rigidbody _rigid;
 
-        public Image healthBar;
-
         public Define.EnemyStyle _type = Define.EnemyStyle.Unknown;
 
         protected EnemyStat _stat;
@@ -27,9 +25,6 @@ namespace TowerDefense
 
         public abstract void TakeDamage(int damage);
         public abstract void Dead();
-
-
-
 
 
     }

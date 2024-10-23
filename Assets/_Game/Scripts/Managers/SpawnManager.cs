@@ -85,7 +85,7 @@ namespace TowerDefense
         }
         private void SpawnEnemy()
         {
-            GameObject enemy = Managers.Resource.Instantiate("Enemies/" + _readWave[_waveID].enemies[_currentEnemyIndex].id.ToString());
+            GameObject enemy = Managers.Resource.Instantiate("Enemies/" + _readWave[_waveID].enemies[_currentEnemyIndex].id.ToString(), transform.position);
         }
         private void UpdateWave()
         {

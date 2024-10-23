@@ -5,7 +5,7 @@
       "name": "FireTower",
       "damage": "10",
       "fireRate": "2",
-      "projectileSpeed":"2",
+      "projectileSpeed":"15",
       "range":"20",
       "locked":false,
       "unlockedLevel":0
@@ -16,7 +16,7 @@
       "damage": "10",
       "fireRate": "1",
       "range":"10",
-      "projectileSpeed":"3.0",
+      "projectileSpeed":"15",
       "locked":false,
       "unlockedLevel":0
     }

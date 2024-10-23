@@ -1,11 +1,11 @@
-using UnityEngine.UI;
+using System;
 namespace TowerDefense
 {
 
     public interface IDamageable
     {
-        float health { get; set; }
+        public event Action<int, int> HealthChanged;
+
         void Dead();
     }
-
 }
