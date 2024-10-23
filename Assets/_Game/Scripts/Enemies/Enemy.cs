@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using TowerDefense.Utils;
 namespace TowerDefense
 {
     public class Enemy : BaseEnemy, IDamageable
@@ -13,6 +14,13 @@ namespace TowerDefense
 
 
         }
+        private void OnCollisionEnter(Collision col)
+        {
+            if (col.gameObject.CompareTag(Define.GameplayTags.MainBase.ToString()))
+            {
+                Debug.Log("GameOver");
+            }
+        }
         private void OnEnable()
         {
             _isLive = true;
@@ -21,6 +29,17 @@ namespace TowerDefense
         {
             if (!_isLive)
                 return;
+        }
+
+
+        public override void TakeDamage(int damage)
+        {
+            _stat.HP -= damage;
+        }
+
+        public override void Dead()
+        {
+            Destroy(this.gameObject);
         }
     }
 }

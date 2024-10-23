@@ -1,0 +1,14 @@
+{
+  "shops": [
+    {
+      "id": "1",
+      "name": "FireTower",
+      "amount":0
+    },
+    {
+      "id": "2",
+      "name": "EnergyTower",
+      "amount":0
+    }
+  ]
+}

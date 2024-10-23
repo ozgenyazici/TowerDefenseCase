@@ -12,7 +12,14 @@
         }
         public enum GameplayTags
         {
-            Enemy
+            Enemy,
+            MainBase
+        }
+
+        public enum Tower
+        {
+            FireTower,
+            EnegeryTower
         }
     }
 }

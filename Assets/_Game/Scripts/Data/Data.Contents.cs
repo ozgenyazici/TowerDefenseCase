@@ -68,7 +68,7 @@ namespace TowerDefense.Data
     {
         public int id;
         public string name;
-        public float damage;
+        public int damage;
         public float fireRate;
         public float projectileSpeed;
         public bool locked;

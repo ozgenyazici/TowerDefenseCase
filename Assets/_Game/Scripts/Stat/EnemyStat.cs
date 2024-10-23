@@ -2,8 +2,6 @@
 
 namespace TowerDefense
 {
-    
-
     [RequireComponent(typeof(Enemy))]
     public class EnemyStat : Stat
     {

@@ -12,6 +12,7 @@ public class ZenjectInstaller : MonoInstaller
         Container.Bind<DataManager>().AsSingle().NonLazy();
         Container.Bind<ResourceManager>().AsSingle();
         Container.Bind<ReadWave>().AsSingle();
+
         #endregion
     }
 }

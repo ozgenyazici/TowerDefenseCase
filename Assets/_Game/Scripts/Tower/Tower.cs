@@ -5,32 +5,42 @@ using Zenject;
 
 namespace TowerDefense
 {
-    public class Tower : BaseTower, IAttackable, ITurnable
+    public class Tower : BaseTower, ITurnable
     {
-        [Inject] private ResourceManager _resourceManager;
 
-        private Transform target;
+        [SerializeField] private Transform target;
         private Enemy targetEnemy;
         private string enemyTag => Define.GameplayTags.Enemy.ToString();
 
         public float turnSpeed { get; set; }
-        public Transform partToRotate { get; set; }
 
+        [SerializeField] private Transform partToRotate;
+
+        private bool isReady = false;
         private void Start()
         {
             InvokeRepeating(nameof(UpdateTarget), 0f, 0.5f);
+            BuildingsGrid.OnBuildPlaced += Ready;
         }
-        public void ExecuteAttack()
+
+        private void Ready()
         {
-
+            isReady = true;
         }
-
         private void Update()
         {
-            if (target == null)
+            if (target == null || !isReady)
                 return;
 
             LockOnTarget();
+
+            if (FireRate <= 0f)
+            {
+                Shoot();
+                FireRate = 1f / FireRate;
+            }
+
+            FireRate -= Time.deltaTime;
         }
 
         private void LockOnTarget()
@@ -68,7 +78,7 @@ namespace TowerDefense
 
         void Shoot()
         {
-            GameObject bulletGO = _resourceManager.Instantiate("Weapon/Bullet");//(GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            GameObject bulletGO = Instantiate("Weapons/Bullet");//(GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 
             SetWeapon(bulletGO);
             /*
@@ -88,3 +98,4 @@ namespace TowerDefense
         }
     }
 }
+
