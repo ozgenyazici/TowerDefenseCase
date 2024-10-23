@@ -28,5 +28,12 @@
             LoadingScene,
             Game
         }
+
+        public enum PopupType
+        {
+            Unknown,
+            GameOver,
+            Win
+        }
     }
 }

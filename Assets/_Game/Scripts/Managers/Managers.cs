@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TowerDefense.Data;
 using TowerDefense.Utils;
-using UnityEngine.UI;
+using TowerDefense.UI;
 
 namespace TowerDefense
 {
@@ -14,15 +14,15 @@ namespace TowerDefense
 
         #region core
         DataManager _data = new DataManager();
-        SceneManagerEx _scene = new SceneManagerEx(); 
+        SceneManagerEx _scene = new SceneManagerEx();
         ResourceManager _resource = new ResourceManager();
         PoolManager _pool = new PoolManager();
-
         public static DataManager Data { get { return Instance._data; } }
         public static ResourceManager Resource { get { return Instance._resource; } }
 
         public static SceneManagerEx Scene { get { return Instance._scene; } }
         public static PoolManager Pool { get { return Instance._pool; } }
+
         #endregion
 
 

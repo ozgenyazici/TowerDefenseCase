@@ -12,23 +12,25 @@ namespace TowerDefense
         [SerializeField] List<ReadWave> _readWave;
 
         private Dictionary<int, Wave> _waveData = new Dictionary<int, Wave>();
-
+        Dictionary<int, Data.Enemy> enemyStat = new Dictionary<int, Data.Enemy>();
 
         //Wave Variables
-        [SerializeField] private int _waveID = 0;
+        [SerializeField] private int _currentWave = 0;
         private int _waveEnemies = 0;
         private bool isReady = false;
-        [SerializeField] private float _enemiesPerSecond = 5;
+        private float _enemiesPerSecond = 5;
         private float _timeSinceLastSpawn;
-        [SerializeField] private int _enemiesLeftToSpawn;
-        private int _enemiesAlive;
+        [SerializeField] private int _enemiesLeftToNextWave;
+
         [SerializeField] private int _totalWave;
         [SerializeField] private int _currentEnemyIndex;
+        [SerializeField] private int _currentEnemyCount;
         private void Awake()
         {
             PrepareWave();
 
             _waveData = Managers.Data.WaveData;
+            enemyStat = Managers.Data.EnemyData;
 
             Init();
         }
@@ -55,12 +57,13 @@ namespace TowerDefense
             }
 
             _currentEnemyIndex = 0;
-            _waveID = 0;
+            _currentWave = 0;
             _totalWave = _readWave.Count;
             for (int i = 0; i < _readWave[0].enemies.Count; i++)
-                _enemiesLeftToSpawn += _waveEnemies = _readWave[0].enemies[i].count;
+                _enemiesLeftToNextWave += _waveEnemies = _readWave[0].enemies[i].count;
 
-            _enemiesPerSecond = _readWave[_waveID].waveSpawnPerSec;
+            _currentEnemyCount = _readWave[_currentWave].enemies[0].count;
+            _enemiesPerSecond = _readWave[_currentWave].waveSpawnPerSec;
         }
 
         private void FixedUpdate()
@@ -70,33 +73,47 @@ namespace TowerDefense
 
             _timeSinceLastSpawn += Time.deltaTime;
 
-            if (_enemiesLeftToSpawn == 0 && _waveID != _totalWave)
+            if (_enemiesLeftToNextWave == 0 && _currentWave != _totalWave - 1)
                 UpdateWave();
 
-            if (_timeSinceLastSpawn >= (1f / _enemiesPerSecond) && _enemiesLeftToSpawn > 0)
+            if (_timeSinceLastSpawn >= (1f / _enemiesPerSecond) && _enemiesLeftToNextWave > 0)
             {
 
                 SpawnEnemy();
-                _enemiesLeftToSpawn--;
-                _enemiesAlive++;
+                _currentEnemyCount--;
+                _enemiesLeftToNextWave--;
                 _timeSinceLastSpawn = 0f;
             }
 
         }
         private void SpawnEnemy()
         {
-            GameObject enemy = Managers.Resource.Instantiate("Enemies/" + _readWave[_waveID].enemies[_currentEnemyIndex].id.ToString(), transform.position);
+            if (_currentEnemyCount <= 0)
+                UpdateEnemy();
+
+            GameObject enemy = Managers.Resource.Instantiate("Enemies/" + _readWave[_currentWave].enemies[_currentEnemyIndex].id.ToString(), transform.position);
+            enemy.GetComponent<Enemy>().Init(enemyStat[(int)_readWave[_currentWave].enemies[_currentEnemyIndex].id]);
+
+        }
+
+        private void UpdateEnemy()
+        {
+
+            _currentEnemyCount = _readWave[_currentWave].enemies[_currentEnemyIndex].count;
+            if (_currentEnemyIndex < _readWave[_currentWave].enemies.Count - 1)
+                _currentEnemyIndex++;
         }
         private void UpdateWave()
         {
             isReady = false;
+            _currentEnemyIndex = 0;
+            _currentWave++;
+            _currentEnemyCount = _readWave[_currentWave].enemies[_currentEnemyIndex].count;
 
-            _waveID++;
+            for (int i = 0; i < _readWave[_currentWave].enemies.Count; i++)
+                _enemiesLeftToNextWave += _waveEnemies = _readWave[_currentWave].enemies[i].count;
 
-            for (int i = 0; i < _readWave[0].enemies.Count; i++)
-                _enemiesLeftToSpawn += _waveEnemies = _readWave[0].enemies[i].count;
-
-            _enemiesPerSecond = _readWave[_waveID].waveSpawnPerSec;
+            _enemiesPerSecond = _readWave[_currentWave].waveSpawnPerSec;
 
             isReady = true;
         }

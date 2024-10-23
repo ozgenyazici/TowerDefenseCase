@@ -20,13 +20,20 @@ namespace TowerDefense
             _stat = GetComponent<EnemyStat>();
 
             target = Waypoints.points[0];
+
         }
-      
+        public void Init(Data.Enemy enemyStat)
+        {
+            _stat.MaxHP = enemyStat.maxHp;
+            _stat.HP = enemyStat.maxHp;
+            _stat.MoveSpeed = enemyStat.moveSpeed;
+
+        }
         private void OnTriggerEnter(Collider col)
         {
             if (col.gameObject.CompareTag(Define.GameplayTags.MainBase.ToString()))
             {
-                Debug.Log("GameOver");
+
             }
         }
         private void OnEnable()
@@ -62,7 +69,7 @@ namespace TowerDefense
         private void Movement()
         {
             Vector3 dir = target.position - transform.position;
-            transform.Translate(dir.normalized * Time.deltaTime*_stat.MoveSpeed, Space.World);
+            transform.Translate(dir.normalized * Time.deltaTime * _stat.MoveSpeed, Space.World);
 
             if (Vector3.Distance(transform.position, target.position) <= 0.4f)
             {

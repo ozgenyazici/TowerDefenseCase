@@ -3,7 +3,7 @@
     {
       "id": "1",
       "name": "FireTower",
-      "damage": "10",
+      "damage": "150",
       "fireRate": "2",
       "projectileSpeed":"15",
       "range":"20",
