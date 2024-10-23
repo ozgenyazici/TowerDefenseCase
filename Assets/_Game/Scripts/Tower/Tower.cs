@@ -14,10 +14,13 @@ namespace TowerDefense
         public float turnSpeed { get; set; }
 
         [SerializeField] private Transform partToRotate;
-
+        [SerializeField] Transform firePoint;
         private bool isReady = false;
+
+        private float fireRateDummy = 0;
         private void Start()
         {
+            fireRateDummy = FireRate;
             InvokeRepeating(nameof(UpdateTarget), 0f, 0.5f);
             BuildingsGrid.OnBuildPlaced += Ready;
         }
@@ -33,13 +36,13 @@ namespace TowerDefense
 
             LockOnTarget();
 
-            if (FireRate <= 0f)
+            if (fireRateDummy <= 0f)
             {
                 Shoot();
-                FireRate = 1f / FireRate;
+                fireRateDummy = FireRate;
             }
 
-            FireRate -= Time.deltaTime;
+            fireRateDummy -= Time.deltaTime;
         }
 
         private void LockOnTarget()
@@ -77,18 +80,18 @@ namespace TowerDefense
 
         void Shoot()
         {
-            GameObject bulletGO = Instantiate("Weapons/Bullet");//(GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            GameObject bulletGO = Managers.Resource.Instantiate("Weapons/Bullet", transform.position);//(GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 
             SetWeapon(bulletGO);
-            /*
-            if (bullet != null)
-                bullet.Seek(target);*/
+
+
         }
         private void SetWeapon(GameObject weapon, float angle = 0)
         {
             Bullet bullet = weapon.GetComponent<Bullet>();
-            bullet.damage = Damage;
-            bullet.speed = ProjectileSpeed;
+            bullet.Seek(target);
+            bullet._damage = Damage;
+            bullet._movSpeed = ProjectileSpeed;
         }
         void OnDrawGizmosSelected()
         {

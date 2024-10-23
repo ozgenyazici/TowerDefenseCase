@@ -25,6 +25,9 @@ namespace TowerDefense
         public static PoolManager Pool { get { return Instance._pool; } }
         #endregion
 
+
+        public static float GameTime { get; set; } = 0;
+
         void Awake()
         {
 
@@ -37,6 +40,10 @@ namespace TowerDefense
             Application.targetFrameRate = 60;
         }
 
+        private void Update()
+        {
+            GameTime += Time.deltaTime;
+        }
         static void Init()
         {
             if (s_instance == null)
