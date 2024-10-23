@@ -13,7 +13,7 @@ namespace TowerDefense.Data
     {
         public Dictionary<int, Enemy> EnemyData { get; private set; } = new Dictionary<int, Enemy>();
         public Dictionary<int, Wave> WaveData { get; private set; } = new Dictionary<int, Wave>();
-        public static Dictionary<int, Tower> TowerData { get; private set; } = new Dictionary<int, Tower>();
+        public Dictionary<int, Tower> TowerData { get; private set; } = new Dictionary<int, Tower>();
         public void Init()
         {
             EnemyData = LoadJson<EnemyData, int, Enemy>(nameof(EnemyData)).MakeDict();

@@ -21,5 +21,12 @@
             FireTower,
             EnegeryTower
         }
+
+        public enum SceneType
+        {
+            Unknown,
+            LoadingScene,
+            Game
+        }
     }
 }

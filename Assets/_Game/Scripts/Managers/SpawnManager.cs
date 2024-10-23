@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 using TowerDefense.Data;
 using TowerDefense.Utils;
 namespace TowerDefense
@@ -10,8 +9,6 @@ namespace TowerDefense
     public class SpawnManager : MonoBehaviour
     {
         //Data
-        [Inject] DataManager _dataManager;
-        [Inject] ResourceManager _resourceManager;
         [SerializeField] List<ReadWave> _readWave;
 
         private Dictionary<int, Wave> _waveData = new Dictionary<int, Wave>();
@@ -31,7 +28,7 @@ namespace TowerDefense
         {
             PrepareWave();
 
-            _waveData = _dataManager.WaveData;
+            _waveData = Managers.Data.WaveData;
 
             Init();
         }
@@ -88,7 +85,7 @@ namespace TowerDefense
         }
         private void SpawnEnemy()
         {
-            GameObject enemy = _resourceManager.Instantiate("Enemies/" + _readWave[_waveID].enemies[_currentEnemyIndex].id.ToString());
+            GameObject enemy = Managers.Resource.Instantiate("Enemies/" + _readWave[_waveID].enemies[_currentEnemyIndex].id.ToString());
         }
         private void UpdateWave()
         {

@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigid: {fileID: 6973562001190527011}
+  healthBar: {fileID: 0}
   _type: 0
 --- !u!114 &5668618686886659559
 MonoBehaviour:

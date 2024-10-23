@@ -1,7 +1,6 @@
 using UnityEngine;
 using System;
 using TowerDefense.Utils;
-using Zenject;
 
 namespace TowerDefense
 {

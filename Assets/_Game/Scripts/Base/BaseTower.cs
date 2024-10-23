@@ -18,8 +18,7 @@ namespace TowerDefense
 
         private void Awake()
         {
-            _towerData = DataManager.TowerData;
-            Debug.Log($"TowerData {_towerData.Count}");
+            _towerData = Managers.Data.TowerData;
 
             SetTowerStat();
         }
